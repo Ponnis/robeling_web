@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://ponnis.github.io/robeling_web/al-folio/sitemap.xml
+Sitemap: https://ponnis.github.io/robeling_web/sitemap.xml
