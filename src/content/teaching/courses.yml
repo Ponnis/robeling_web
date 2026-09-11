@@ -1,0 +1,34 @@
+courses:
+  - course_id: "280411-1"
+    title: "Stars and planetary systems"
+    semester: "Fall"
+    year: 2026
+    role: "Instructor"
+    university: "University of Vienna"
+    description: "Bachelor's level course in stellar physics and planetary systems"
+    url: ""
+  - course_id: ""
+    title: "Radar physics and signal processing"
+    semester: "Winter"
+    year: 2024
+    role: "Lecturer"
+    university: "SAAB"
+    description: "Introductory course covering the basics of radar physics and signal processing for radar"
+    url: ""
+  - course_id: "TDA594"
+    title: "Software engineering principles for complex systems"
+    semester: "Winter"
+    year: 2022
+    role: "Instructor"
+    university: "Chalmers University of Technology"
+    description: "Bachelor's level course in code architecture and software engineering principles"
+    url: ""
+  - course_id: "TDA594"
+    title: "Software engineering principles for complex systems"
+    semester: "Winter"
+    year: 2021
+    role: "Instructor"
+    university: "Chalmers University of Technology"
+    description: "Bachelor's level course in code architecture and software engineering principles"
+    url: ""
+  

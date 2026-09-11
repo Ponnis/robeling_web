@@ -1,0 +1,6 @@
+repositories:
+  - name: "Kowalski"
+    description: "KISS-principle hydrodynamics code for atmospheres"
+    url: "https://github.com/Ponnis/Kowalski"
+    language: "Python"
+    stars: 2
