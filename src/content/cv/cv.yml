@@ -1,56 +1,38 @@
 education:
-  - degree: "Ph.D. in Computer Science"
-    institution: "Massachusetts Institute of Technology"
-    year: "2017–2021"
-    description: "Thesis: Neural Approaches to Cross-Lingual NLP."
-  - degree: "B.S. in Computer Science (Highest Honors)"
-    institution: "University of California, Berkeley"
-    year: "2013–2017"
-    description: "Graduated summa cum laude."
+  - degree: "MSc. in Physics and Software Engineering"
+    institution: "Chalmers University of Technology"
+    year: "2021–2023"
+    description: "Thesis: Formation of compact obscured nuclei"
+  - degree: "BSc. in Physics and Software Engineering"
+    institution: "Chalmers University of Technology"
+    year: "2018–2021"
+    description: "Award for academic excellence"
 
 experience:
-  - title: "Assistant Professor"
-    organization: "Greendale University"
-    start_date: "2022"
-    end_date: "Present"
-    description: "Leading the Language, Learning & Fairness Lab."
-  - title: "Postdoctoral Researcher"
-    organization: "Google DeepMind"
+  - title: "Research scientist"
+    organization: "Saab AB"
+    start_date: "2023"
+    end_date: "2024"
+    description: "Development and research of signal processing algorithms for radar"
+  - title: "Project researcher and outreach work"
+    organization: "Chalmers University of Technology"
     start_date: "2021"
+    end_date: "2023"
+    description: "Writing observation proposals for hot cores and guiding tours and physics students around Onsala space observatory"
+  - title: "Software engineer"
+    organization: "Centiro AB"
+    start_date: "2020"
     end_date: "2022"
-    description: "Large language model alignment and safety."
-  - title: "Research Intern"
-    organization: "Meta AI (FAIR)"
-    start_date: "Summer 2020"
-    end_date: "Summer 2020"
-    description: "Multilingual NLP and cross-lingual transfer."
+    description: "Backend engineering of logistical systems"
 
 skills:
   - category: "Programming"
-    items: ["Python", "PyTorch", "JAX", "C++", "TypeScript"]
-  - category: "ML/NLP"
-    items: ["Transformers", "Reinforcement Learning", "Multimodal Learning", "Fairness"]
-  - category: "Tools"
-    items: ["Git", "Docker", "Kubernetes", "LaTeX", "Weights & Biases"]
+    items: ["Python", "Fortran", "C++", "Julia", "Java"]
+  - category: "Software"
+    items: ["LaTeX", "Git", ""]
 
 awards:
-  - title: "NSF CAREER Award"
-    organization: "National Science Foundation"
-    year: 2024
-  - title: "Best Paper Award"
-    organization: "ACL 2023"
-    year: 2023
-  - title: "Outstanding Dissertation Award"
-    organization: "MIT EECS"
-    year: 2021
-  - title: "Google PhD Fellowship"
-    organization: "Google"
+  - title: "Sibels stipend award for academic excellence"
+    organization: "Sibels foundation"
     year: 2019
 
-service:
-  - role: "Area Chair"
-    organization: "ACL, EMNLP, NAACL"
-    years: "2023–Present"
-  - role: "Reviewer"
-    organization: "NeurIPS, ICML, ICLR, JMLR"
-    years: "2019–Present"

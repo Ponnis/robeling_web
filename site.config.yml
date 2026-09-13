@@ -13,7 +13,7 @@ profile:
   affiliation: "Department of Astrophysics"
   university: "University of Vienna"
   email: "nils-martin.robeling@univie.ac.at"
-  avatar: "/images/avatar.svg"
+  avatar: "/images/mig.jpeg"
   bio: "I am a PhD candidate at the University of Vienna studying exoplanet gas giant atmospheres!"
   bio_short: "Researching exoplanet atmospheres"
 
@@ -52,7 +52,7 @@ theme:
   palette: "default"
   random_theme: true
   avatars:
-    - "/images/avatar.svg"
+    - "/images/mig.jpeg"
 
 publications:
   author_name: "Nils-Martin Robeling"
