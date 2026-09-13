@@ -30,7 +30,7 @@ pages:
   about: true
   publications: true
   cv: true
-  projects: true
+  projects: false
   news: true
   teaching: true
   talks: true
@@ -41,7 +41,7 @@ pages:
   service: false
   repositories: true
   blog: false
-  gallery: true
+  gallery: false
   books: false
   media: false
   travel: false
