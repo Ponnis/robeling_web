@@ -14,6 +14,8 @@ export interface Publication {
   abstract?: string;
   selected?: boolean;
   preview?: string;
+  /** From the BibTeX field `authorship = {first}` or `{co}`; overrides author-order detection. */
+  authorship?: 'first' | 'co';
   bibtexType: string;
 }
 

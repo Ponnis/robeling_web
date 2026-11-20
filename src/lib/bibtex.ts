@@ -36,6 +36,7 @@ export function parseBibTeX(bibtex: string): Publication[] {
       abstract: fields.abstract ? cleanTeX(fields.abstract) : undefined,
       selected: fields.selected === 'true' || fields.selected === 'yes',
       preview: fields.preview || undefined,
+      authorship: parseAuthorship(fields.authorship),
       bibtexType,
     });
   }
@@ -116,4 +117,35 @@ export function getPublicationsByYear(pubs: Publication[]): Map<number, Publicat
     byYear.get(pub.year)!.push(pub);
   }
   return new Map([...byYear.entries()].sort(([a], [b]) => b - a));
+}
+
+function parseAuthorship(value?: string): Publication['authorship'] {
+  const v = (value || '').trim().toLowerCase().replace(/[\s_-]+/g, '');
+  if (['first', 'firstauthor', 'lead'].includes(v)) return 'first';
+  if (['co', 'coauthor', 'contributing'].includes(v)) return 'co';
+  return undefined;
+}
+
+function normalizeName(name: string): string {
+  return name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '');
+}
+
+/**
+ * True if `authorName` is the first author of `pub`. An explicit `authorship` field in the
+ * BibTeX entry wins; otherwise the surname of the first listed author is compared with the
+ * surname (last word) of `authorName`, ignoring case and diacritics.
+ */
+export function isFirstAuthor(pub: Publication, authorName: string): boolean {
+  if (pub.authorship) return pub.authorship === 'first';
+  const first = pub.authors[0];
+  if (!first || !authorName) return false;
+  const surname = normalizeName(authorName.trim().split(/\s+/).pop() || '');
+  return surname.length > 0 && normalizeName(first.trim().split(/\s+/).pop() || '') === surname;
+}
+
+export function splitByAuthorship(pubs: Publication[], authorName: string) {
+  return {
+    firstAuthor: pubs.filter(p => isFirstAuthor(p, authorName)),
+    coAuthor: pubs.filter(p => !isFirstAuthor(p, authorName)),
+  };
 }

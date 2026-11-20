@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@components/layout/BaseLayout.astro';
 import PublicationList from '@components/publications/PublicationList.astro';
-import { parseBibTeX, getPublicationsByYear } from '@lib/bibtex';
+import { parseBibTeX, getPublicationsByYear, splitByAuthorship } from '@lib/bibtex';
 import { getConfig } from '@lib/config';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,13 +10,18 @@ const config = getConfig();
 if (!config.pages.publications) return Astro.redirect('/404');
 
 let publications: any[] = [];
-let pubsByYear = new Map<number, any[]>();
+let firstAuthorByYear = new Map<number, any[]>();
+let coAuthorByYear = new Map<number, any[]>();
+let nFirst = 0, nCo = 0;
 
 try {
   const bibPath = path.resolve(process.cwd(), 'src/content/publications', config.publications.bibtex_file);
   const bibContent = fs.readFileSync(bibPath, 'utf-8');
   publications = parseBibTeX(bibContent);
-  pubsByYear = getPublicationsByYear(publications);
+  const { firstAuthor, coAuthor } = splitByAuthorship(publications, config.publications.author_name);
+  nFirst = firstAuthor.length; nCo = coAuthor.length;
+  firstAuthorByYear = getPublicationsByYear(firstAuthor);
+  coAuthorByYear = getPublicationsByYear(coAuthor);
 } catch (e) {
   console.error('Error reading BibTeX:', e);
 }
@@ -61,8 +66,19 @@ const venueTypes = [...new Set(publications.map(p => p.venueType))];
     </div>
   </div>
 
-  <!-- Publication list by year -->
-  <PublicationList pubsByYear={pubsByYear} authorName={config.publications.author_name} />
+  <!-- First-author publications on top, then co-authored ones; each grouped by year -->
+  {nFirst > 0 && (
+    <section data-authorship-section="first" class="mb-14">
+      <h2 class="text-2xl font-bold mb-6">First-author publications <span class="text-base font-normal text-[var(--color-text-secondary)]">({nFirst})</span></h2>
+      <PublicationList pubsByYear={firstAuthorByYear} authorName={config.publications.author_name} />
+    </section>
+  )}
+  {nCo > 0 && (
+    <section data-authorship-section="co">
+      <h2 class="text-2xl font-bold mb-6">Co-authored publications <span class="text-base font-normal text-[var(--color-text-secondary)]">({nCo})</span></h2>
+      <PublicationList pubsByYear={coAuthorByYear} authorName={config.publications.author_name} />
+    </section>
+  )}
 
   <script>
     document.addEventListener('astro:page-load', () => {
@@ -87,6 +103,13 @@ const venueTypes = [...new Set(publications.map(p => p.venueType))];
 
         // Hide empty year sections
         yearSections.forEach(section => {
+          const el = section as HTMLElement;
+          const visibleCards = el.querySelectorAll('[data-pub-card]:not([style*="display: none"])');
+          el.style.display = visibleCards.length > 0 ? '' : 'none';
+        });
+
+        // Hide an authorship section (first / co) when the filter leaves it empty
+        document.querySelectorAll('[data-authorship-section]').forEach(section => {
           const el = section as HTMLElement;
           const visibleCards = el.querySelectorAll('[data-pub-card]:not([style*="display: none"])');
           el.style.display = visibleCards.length > 0 ? '' : 'none';

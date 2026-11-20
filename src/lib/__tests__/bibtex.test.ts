@@ -102,3 +102,16 @@ describe('parseBibTeX', () => {
     expect(parseBibTeX(preprint)[0].venueType).toBe('preprint');
   });
 });
+
+describe('authorship split', () => {
+  const bib = `@article{a, title={Lead}, author={Robeling, Nils-Martin and Doe, John}, journal={A&A}, year={2026}}
+@article{b, title={Co}, author={Boro Saikia, Sudeshna and Robeling, Nils-Martin}, journal={MNRAS}, year={2026}}
+@article{c, title={Forced}, author={Doe, John and Robeling, Nils-Martin}, journal={ApJ}, year={2025}, authorship={first}}
+@article{d, title={Accent}, author={R{\\"o}beling, N. and Doe, John}, journal={ApJ}, year={2024}, authorship={co}}`;
+  it('uses the explicit authorship field, else the first author surname', async () => {
+    const { splitByAuthorship } = await import('../bibtex');
+    const { firstAuthor, coAuthor } = splitByAuthorship(parseBibTeX(bib), 'Nils-Martin Robeling');
+    expect(firstAuthor.map(p => p.id).sort()).toEqual(['a', 'c']);
+    expect(coAuthor.map(p => p.id).sort()).toEqual(['b', 'd']);
+  });
+});
